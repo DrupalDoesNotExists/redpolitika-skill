@@ -1,0 +1,41 @@
+# Пример: композитные правила с позиционными и контекстными методами
+rules:
+  - id: "capitalization/after-colon"
+    severity: 4
+    category: "cleanliness"
+    name: "Строчная после двоеточия"
+    detect:
+      after:
+        pattern:
+          contains:
+            value: ": "
+        max_chars: 80
+        child:
+          regex: "^[А-Я]"
+    fix:
+      suggestion: "После двоеточия пишите со строчной буквы"
+
+  - id: "readability/modal-overload"
+    severity: 3
+    category: "readability"
+    name: "Перегрузка модальными глаголами"
+    detect:
+      threshold:
+        count: 5
+        per: paragraph
+        child:
+          wordlist:
+            list: ["должен", "обязан", "нужно", "следует", "необходимо"]
+
+  - id: "case/uppercase-inside-text"
+    severity: 2
+    category: "cleanliness"
+    name: "Капс в середине текста"
+    detect:
+      and:
+        - sentence_start: {}
+        - case:
+            mode: "all_caps"
+            child:
+              wordlist:
+                list: ["Москва", "Россия"]

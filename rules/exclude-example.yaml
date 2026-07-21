@@ -1,0 +1,32 @@
+# Пример: exclude для исключения ложных срабатываний
+rules:
+  - id: "typography/yo-all"
+    severity: 3
+    category: "readability"
+    name: "Слова с Ё"
+    detect:
+      exclude:
+        match:
+          regex: "[а-яА-ЯёЁ]*ё[а-яА-ЯёЁ]*"
+        without:
+          - wordlist:
+              list: ["ёлка", "ёжик", "ёмкость", "ёкать"]
+          - any: {}
+    fix:
+      suggestion: "Замените Ё на Е (кроме исключений)"
+
+  - id: "cleanliness/obscene"
+    severity: 9
+    category: "cleanliness"
+    name: "Обсценная лексика"
+    detect:
+      exclude:
+        match:
+          wordlist:
+            list: ["козёл", "осёл", "петух"]
+        without:
+          - wordlist:
+              list: ["горный козёл", "упрямый осёл"]
+    fix:
+      replace:
+        with: "***"

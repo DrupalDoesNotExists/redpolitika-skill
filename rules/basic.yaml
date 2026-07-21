@@ -1,0 +1,37 @@
+# Пример: базовые правила типографики
+rules:
+  - id: "typography/ellipsis"
+    severity: 5
+    category: "readability"
+    name: "Многоточие"
+    url: "/rules/ellipsis"
+    suggestion: "Замените три точки на символ многоточия"
+    detect:
+      regex: "\\.\\.\\."
+    fix:
+      replace:
+        with: "…"
+
+  - id: "typography/quotes"
+    severity: 3
+    category: "readability"
+    name: "Кавычки"
+    suggestion: "Замените прямые кавычки на ёлочки"
+    detect:
+      regex: '"([^"]*)"'
+    fix:
+      regex_replace:
+        pattern: '"([^"]*)"'
+        replacement: "«$1»"
+
+  - id: "typography/hyphen"
+    severity: 3
+    category: "readability"
+    name: "Дефис и тире"
+    suggestion: "Замените дефис между словами на тире"
+    detect:
+      regex: "(\\w+)\\s?-\\s?(\\w+)"
+    fix:
+      regex_replace:
+        pattern: "(\\w+)\\s?-\\s?(\\w+)"
+        replacement: "$1 — $2"

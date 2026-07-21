@@ -1,0 +1,31 @@
+# Пример: helper-правило с ref для переиспользования детекции
+rules:
+  # Helper: severity=0, не производит флагов
+  - id: "commons/strong-words"
+    detect:
+      wordlist:
+        list: ["очень", "крайне", "чрезвычайно", "невероятно"]
+
+  # Использует helper через ref
+  - id: "redundancy/strong-adjectives"
+    severity: 5
+    category: "readability"
+    name: "Усилители перед прилагательными"
+    detect:
+      and:
+        - ref: "commons/strong-words"
+        - regex: "\\w+"
+    fix:
+      remove: {}
+      suggestion: "Усилитель избыточен перед этим словом"
+
+  # Другое правило, использующее тот же helper
+  - id: "redundancy/strong-opinion"
+    severity: 4
+    category: "readability"
+    name: "Усилители перед мнением"
+    detect:
+      and:
+        - ref: "commons/strong-words"
+        - wordlist:
+            list: ["важно", "нужно", "следует"]
