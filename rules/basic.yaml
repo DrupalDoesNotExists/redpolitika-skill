@@ -4,8 +4,6 @@ rules:
     severity: 5
     category: "readability"
     name: "Многоточие"
-    url: "/rules/ellipsis"
-    suggestion: "Замените три точки на символ многоточия"
     detect:
       regex: "\\.\\.\\."
     fix:
@@ -16,7 +14,6 @@ rules:
     severity: 3
     category: "readability"
     name: "Кавычки"
-    suggestion: "Замените прямые кавычки на ёлочки"
     detect:
       regex: '"([^"]*)"'
     fix:
@@ -28,7 +25,6 @@ rules:
     severity: 3
     category: "readability"
     name: "Дефис и тире"
-    suggestion: "Замените дефис между словами на тире"
     detect:
       regex: "(\\w+)\\s?-\\s?(\\w+)"
     fix:
